@@ -4,9 +4,11 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,10 +26,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupDeck();
+
+        Spinner dropdown = findViewById(R.id.spinner);
+        String[] items = new String[]{"1", "2", "three"};
+        ArrayList<String> ree = new ArrayList<>();
+        ree.add("boo");
+        ree.add("bear");
+
+        ArrayList<ImageView> skre = new ArrayList<>();
+        ImageView r = new ImageView(this);
+        ImageView rr = new ImageView(this);
+        r.setImageResource(R.drawable.icon_bless);
+        rr.setImageResource(R.drawable.icon_curse);
+        skre.add(r);
+        skre.add(rr);
+
+        ArrayAdapter<ImageView> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, skre);
+        dropdown.setAdapter(adapter);
+
     }
 
     public void clickDeck(View view){
+        if(deck.isEmpty()){
+            return;
+        }
         int chosenCard = deck.remove(0);
+        updateDeckCount();
 
         if(chosenCard == R.drawable.attack_mod_bless){
             blessCounter--;
@@ -40,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             textView.setText(curseCounter.toString());
         }
         else if(chosenCard == R.drawable.attack_mod_2x || chosenCard == R.drawable.attack_mod_null){
-            Button shuffleButton = findViewById(R.id.shuffleButton);
+            ImageButton shuffleButton = findViewById(R.id.shuffleButton);
             shuffleButton.setBackgroundColor(Color.RED);
         }
         updateDiscardPile(chosenCard);
@@ -69,8 +93,8 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout scrollView = findViewById(R.id.scrollboi);
         scrollView.removeAllViews();
         discardPile.clear();
-        Button shuffleButton = findViewById(R.id.shuffleButton);
-        shuffleButton.setTextColor(Color.BLACK);
+        ImageButton shuffleButton = findViewById(R.id.shuffleButton);
+        view.setBackgroundColor(Color.TRANSPARENT);
     }
 
     public void clickBless(View view){
@@ -79,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
         blessCounter++;
         TextView textView = findViewById(R.id.blessCounter);
         textView.setText(blessCounter.toString());
+        updateDeckCount();
     }
 
     public void clickCurse(View view){
@@ -87,37 +112,20 @@ public class MainActivity extends AppCompatActivity {
         curseCounter++;
         TextView textView = findViewById(R.id.curseCounter);
         textView.setText(curseCounter.toString());
+        updateDeckCount();
     }
 
-    public void clickUsedDeck(View view){
-//        LinearLayout scrollView = findViewById(R.id.scrollboi);
-//
-//        ImageView iv = new ImageView(this);
-//        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT
-//                , LinearLayout.LayoutParams.WRAP_CONTENT);
-//        param.setMargins(0, 0, 10, 0);
-//        iv.setLayoutParams(param);
-//        iv.setImageResource(R.drawable.attack_mod_plus_1);
-//        iv.setAdjustViewBounds(true);
-//        System.out.println("iv.getX() = " + iv.getX());
-//        System.out.println("iv.getY() = " + iv.getY());
-//        scrollView.addView(iv);
-//
-//        ImageView ivv = new ImageView(this);
-//        LinearLayout.LayoutParams paramalso = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT
-//                , LinearLayout.LayoutParams.WRAP_CONTENT);
-//        paramalso.setMargins(0, 0, 50, 0);
-//        paramalso.leftMargin = 100;
-//        ivv.setLayoutParams(paramalso);
-//        ivv.setImageResource(R.drawable.attack_mod_minus_1);
-//        ivv.setAdjustViewBounds(true);
-//        System.out.println("iv.getX() = " + ivv.getX());
-//        System.out.println("iv.getY() = " + ivv.getY());
-//        scrollView.addView(ivv);
-
-
-
+    public void updateDeckCount(){
+        TextView deckCount = findViewById(R.id.deckCount);
+        deckCount.setText(String.valueOf(deck.size()));
     }
+
+    public void clickDropdown(View view){
+        Spinner spinner = findViewById(R.id.spinner);
+        String booga = spinner.getSelectedItem().toString();
+        System.out.println("Watup fam: " + booga);
+    }
+
 
     public void setupDeck(){
         deck = new ArrayList<>();
@@ -135,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
             deck.add(R.drawable.attack_mod_curse);
         }
         Collections.shuffle(deck);
+        updateDeckCount();
     }
 
 
