@@ -7,13 +7,34 @@
     android:background="@android:color/background_dark"
     tools:context=".MainActivity">
 
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="272dp"
+        android:layout_height="116dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="12dp"
+        android:fillViewport="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/deckButtonPlayer"
+        app:layout_constraintTop_toBottomOf="@+id/shuffleButtonPlayer">
+
+        <LinearLayout
+            android:id="@+id/scrollboiplayer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" />
+    </HorizontalScrollView>
+
     <ImageButton
         android:id="@+id/deckButton"
+        style="@style/DeckOfModifier"
         android:onClick="clickDeck"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shuffleButton"
-        app:srcCompat="@drawable/attack_mod_back"
-        style="@style/DeckOfModifier" />
+        app:srcCompat="@drawable/attack_mod_back" />
 
     <ImageView
         android:id="@+id/blessButton"
@@ -29,6 +50,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/icon_bless" />
 
+    <ImageView
+        android:id="@+id/blessButtonPlayer"
+        android:layout_width="38dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:cropToPadding="true"
+        android:onClick="clickBlessPlayer"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toEndOf="@+id/shuffleButtonPlayer"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
+        app:srcCompat="@drawable/icon_bless" />
+
     <TextView
         android:id="@+id/blessCounter"
         android:layout_width="30dp"
@@ -39,10 +74,25 @@
         android:gravity="center"
         android:rotation="270"
         android:text="0"
-        android:textColor="@android:color/holo_blue_bright"
+        android:textColor="@android:color/holo_orange_light"
         android:textSize="8sp"
         app:layout_constraintStart_toEndOf="@+id/blessButton"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/blessCounterPlayer"
+        android:layout_width="30dp"
+        android:layout_height="26dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:rotation="270"
+        android:text="0"
+        android:textColor="@android:color/holo_orange_light"
+        android:textSize="8sp"
+        app:layout_constraintStart_toEndOf="@+id/blessButtonPlayer"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
     <ImageView
         android:id="@+id/curseButton"
@@ -57,6 +107,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/icon_curse" />
 
+    <ImageView
+        android:id="@+id/curseButtonPlayer"
+        android:layout_width="38dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="8dp"
+        android:onClick="clickCursePlayer"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toEndOf="@+id/blessCounterPlayer"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
+        app:srcCompat="@drawable/icon_curse" />
+
     <TextView
         android:id="@+id/curseCounter"
         android:layout_width="30dp"
@@ -67,10 +130,40 @@
         android:gravity="center"
         android:rotation="270"
         android:text="0"
-        android:textColor="@android:color/holo_red_dark"
+        android:textColor="@android:color/holo_purple"
         android:textSize="8sp"
         app:layout_constraintStart_toEndOf="@+id/curseButton"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/curseCounterPlayer"
+        android:layout_width="30dp"
+        android:layout_height="29dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:rotation="270"
+        android:text="0"
+        android:textColor="@android:color/holo_purple"
+        android:textSize="8sp"
+        app:layout_constraintStart_toEndOf="@+id/curseButtonPlayer"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+
+    <TextView
+        android:id="@+id/minusCounterPlayer"
+        android:layout_width="30dp"
+        android:layout_height="29dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:rotation="270"
+        android:text="0"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="8sp"
+        app:layout_constraintStart_toEndOf="@+id/minusSpecialButton"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView"
@@ -96,25 +189,25 @@
 
     <TextView
         android:id="@+id/deckCount"
+        style="@style/CardCount"
         android:text="  20"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/CardCount" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/shuffleButton"
+        style="@style/ShuffleButton"
         android:onClick="clickShuffle"
         app:layout_constraintStart_toEndOf="@+id/deckCount"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_rotate"
-        style="@style/ShuffleButton" />
+        app:srcCompat="@android:drawable/ic_menu_rotate" />
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="311dp"
         android:layout_height="236dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton3"
+        app:layout_constraintTop_toBottomOf="@+id/deckButtonPlayer"
         tools:layout_editor_absoluteX="84dp">
 
         <LinearLayout
@@ -153,14 +246,15 @@
         app:layout_constraintBottom_toTopOf="@+id/spinner"
         app:layout_constraintEnd_toStartOf="@+id/scrollView2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton3" />
+        app:layout_constraintTop_toBottomOf="@+id/deckButtonPlayer" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/deckButtonPlayer"
         style="@style/DeckOfModifier"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:onClick="clickDeckPlayer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shuffleButtonPlayer"
         app:srcCompat="@drawable/attack_mod_back" />
@@ -169,11 +263,11 @@
         android:id="@+id/deckCountPlayer"
         style="@style/CardCount"
         android:layout_marginBottom="16dp"
-        android:layout_marginLeft="26dp"
-        android:layout_marginStart="26dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
         android:layout_marginTop="16dp"
         android:text="  20"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton3"
+        app:layout_constraintBottom_toTopOf="@+id/deckButtonPlayer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/deckButton" />
 
@@ -181,8 +275,37 @@
         android:id="@+id/shuffleButtonPlayer"
         style="@style/ShuffleButton"
         android:layout_marginTop="8dp"
+        android:onClick="clickShufflePlayer"
         app:layout_constraintStart_toEndOf="@+id/deckCountPlayer"
         app:layout_constraintTop_toBottomOf="@+id/deckButton"
         app:srcCompat="@android:drawable/ic_menu_rotate" />
+
+    <ImageButton
+        android:id="@+id/minusSpecialButton"
+        android:layout_width="38dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:onClick="clickMinusAddPlayer"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toEndOf="@+id/curseCounterPlayer"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
+        app:srcCompat="@drawable/icon_minus_1" />
+
+    <ImageButton
+        android:id="@+id/plusSpecialButton"
+        android:layout_width="38dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:onClick="clickPlusAddPlayer"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toEndOf="@+id/minusCounterPlayer"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 </android.support.constraint.ConstraintLayout>
