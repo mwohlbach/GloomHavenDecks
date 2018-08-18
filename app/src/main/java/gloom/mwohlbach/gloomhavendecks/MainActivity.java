@@ -1,9 +1,11 @@
 package gloom.mwohlbach.gloomhavendecks;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,7 +15,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     private ArrayList<Integer> deck;
     private ArrayList<Integer> discardPile = new ArrayList<>();
@@ -194,9 +196,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickDropdown(View view){
-        Spinner spinner = findViewById(R.id.spinner);
-        String booga = spinner.getSelectedItem().toString();
-        System.out.println("Watup fam: " + booga);
+//        Spinner spinner = findViewById(R.id.spinner);
+//        String booga = spinner.getSelectedItem().toString();
+//        System.out.println("Watup fam: " + booga);
+        TextView textView = findViewById(R.id.perkText1);
+        textView.setText("Remove two -1 cards.");
     }
 
 
